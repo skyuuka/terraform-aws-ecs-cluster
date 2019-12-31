@@ -96,9 +96,9 @@ variable "enabled_metrics" {
     "GroupTotalInstances",
   ]
 
-  type = "list"
+  type = list(string)
 }
 
 variable "subnet_ids" {
-  type = "list"
+  type = list(string)
 }
