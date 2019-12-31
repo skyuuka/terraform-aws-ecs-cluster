@@ -185,7 +185,7 @@ resource "aws_autoscaling_group" "container_instance" {
 
   launch_template {
     id      = aws_launch_template.container_instance.id
-    version = "$$Latest"
+    version = "$Latest"
   }
 
   health_check_grace_period = var.health_check_grace_period
