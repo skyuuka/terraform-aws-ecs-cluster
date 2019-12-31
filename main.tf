@@ -183,7 +183,7 @@ resource "aws_autoscaling_group" "container_instance" {
 
   name = coalesce(var.autoscaling_group_name, local.autoscaling_group_name)
 
-  launch_template = {
+  launch_template {
     id      = aws_launch_template.container_instance.id
     version = "$$Latest"
   }
