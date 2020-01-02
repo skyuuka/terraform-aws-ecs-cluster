@@ -75,11 +75,9 @@ data "aws_iam_policy_document" "ecs_autoscale_assume_role" {
 resource "aws_security_group" "container_instance" {
   vpc_id = var.vpc_id
 
-  tags = {
-    Name        = coalesce(var.security_group_name, local.security_group_name)
-    Project     = var.project
-    Environment = var.environment
-  }
+  tags = merge(var.tag_map, map(
+    "Name", coalesce(var.security_group_name, local.security_group_name)
+  )
 }
 
 #
@@ -155,7 +153,7 @@ resource "aws_launch_template" "container_instance" {
 
   disable_api_termination = false
 
-  name_prefix = "lt${title(var.environment)}ContainerInstance-"
+  name_prefix = "lt${title(lookup(var.tag_map, "Environment", "Unknown"))}ContainerInstance-"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.container_instance.name
@@ -205,13 +203,13 @@ resource "aws_autoscaling_group" "container_instance" {
 
   tag {
     key                 = "Project"
-    value               = var.project
+    value               = lookup(var.tag_map, "Project", "Unknown")
     propagate_at_launch = true
   }
 
   tag {
     key                 = "Environment"
-    value               = var.environment
+    value               = lookup(var.tag_map, "Environment", "Unknown")
     propagate_at_launch = true
   }
 }

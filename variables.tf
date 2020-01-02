@@ -1,11 +1,3 @@
-variable "project" {
-  default = "Unknown"
-}
-
-variable "environment" {
-  default = "Unknown"
-}
-
 variable "cluster_name" {
   default = ""
 }
@@ -101,4 +93,9 @@ variable "enabled_metrics" {
 
 variable "subnet_ids" {
   type = list(string)
+}
+
+variable tag_map {
+  type = map(string)
+  default = { }
 }
