@@ -77,7 +77,7 @@ resource "aws_security_group" "container_instance" {
 
   tags = merge(var.tag_map, map(
     "Name", coalesce(var.security_group_name, local.security_group_name)
-  )
+  ))
 }
 
 #
