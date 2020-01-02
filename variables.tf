@@ -6,10 +6,6 @@ variable "autoscaling_group_name" {
   default = ""
 }
 
-variable "security_group_name" {
-  default = ""
-}
-
 variable "ecs_for_ec2_service_role_name" {
   default = ""
 }
@@ -95,7 +91,32 @@ variable "subnet_ids" {
   type = list(string)
 }
 
-variable tag_map {
+variable asg_tag_map {
+  type = list(map(string))
+  default = [
+    {
+      key   = "Name"
+      value = "ContainerInstance"
+      propagate_at_launch = true
+    },
+    {
+      "key"   = "Project"
+      "value" = "Unknown"
+      "propagate_at_launch" = true
+    },
+    {
+      "key"   = "Environment"
+      "value" = "Unknown"
+      "propagate_at_launch" = true
+    }
+  ]
+}
+
+variable sg_tag_map {
   type = map(string)
-  default = { }
+  default = {
+    Name        = "sgContainerInstance"
+    Project     = "Unknown"
+    Environment = "Unknown"
+  }
 }

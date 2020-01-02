@@ -74,10 +74,7 @@ data "aws_iam_policy_document" "ecs_autoscale_assume_role" {
 #
 resource "aws_security_group" "container_instance" {
   vpc_id = var.vpc_id
-
-  tags = merge(var.tag_map, map(
-    "Name", coalesce(var.security_group_name, local.security_group_name)
-  ))
+  tags   = var.sg_tag_map
 }
 
 #
@@ -195,23 +192,7 @@ resource "aws_autoscaling_group" "container_instance" {
   enabled_metrics           = var.enabled_metrics
   vpc_zone_identifier       = var.subnet_ids
 
-  tag {
-    key                 = "Name"
-    value               = "ContainerInstance"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Project"
-    value               = local.project
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Environment"
-    value               = local.environment
-    propagate_at_launch = true
-  }
+  tags = var.asg_tag_map
 }
 
 #
