@@ -153,7 +153,7 @@ resource "aws_launch_template" "container_instance" {
 
   disable_api_termination = false
 
-  name_prefix = "lt${title(lookup(var.tag_map, "Environment", "Unknown"))}ContainerInstance-"
+  name_prefix = "lt${title(local.environment)}ContainerInstance-"
 
   iam_instance_profile {
     name = aws_iam_instance_profile.container_instance.name
@@ -203,13 +203,13 @@ resource "aws_autoscaling_group" "container_instance" {
 
   tag {
     key                 = "Project"
-    value               = lookup(var.tag_map, "project", "Unknown")
+    value               = local.project
     propagate_at_launch = true
   }
 
   tag {
     key                 = "Environment"
-    value               = lookup(var.tag_map, "environment", "Unknown")
+    value               = local.environment
     propagate_at_launch = true
   }
 }
