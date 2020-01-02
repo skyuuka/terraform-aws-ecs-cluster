@@ -203,13 +203,13 @@ resource "aws_autoscaling_group" "container_instance" {
 
   tag {
     key                 = "Project"
-    value               = lookup(var.tag_map, "Project", "Unknown")
+    value               = lookup(var.tag_map, "project", "Unknown")
     propagate_at_launch = true
   }
 
   tag {
     key                 = "Environment"
-    value               = lookup(var.tag_map, "Environment", "Unknown")
+    value               = lookup(var.tag_map, "environment", "Unknown")
     propagate_at_launch = true
   }
 }
