@@ -100,14 +100,14 @@ variable asg_tag_map {
       propagate_at_launch = true
     },
     {
-      "key"   = "Project"
-      "value" = "Unknown"
-      "propagate_at_launch" = true
+      key   = "Project"
+      value = "Unknown"
+      propagate_at_launch = true
     },
     {
-      "key"   = "Environment"
-      "value" = "Unknown"
-      "propagate_at_launch" = true
+      key   = "Environment"
+      value = "Unknown"
+      propagate_at_launch = true
     }
   ]
 }
