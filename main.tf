@@ -73,6 +73,7 @@ data "aws_iam_policy_document" "ecs_autoscale_assume_role" {
 # Security group resources
 #
 resource "aws_security_group" "container_instance" {
+  name   = lookup(var.sg_tag_map, "Name", "SG${local.cluster_name}")
   vpc_id = var.vpc_id
   tags   = var.sg_tag_map
 }
