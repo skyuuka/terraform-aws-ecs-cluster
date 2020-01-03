@@ -173,6 +173,7 @@ resource "aws_launch_template" "container_instance" {
 
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
+    security_groups             = [aws_security_group.container_instance.id]
   }
 }
 
