@@ -170,6 +170,10 @@ resource "aws_launch_template" "container_instance" {
   monitoring {
     enabled = var.detailed_monitoring
   }
+
+  network_interfaces {
+    associate_public_ip_address = var.associate_public_ip_address
+  }
 }
 
 resource "aws_autoscaling_group" "container_instance" {

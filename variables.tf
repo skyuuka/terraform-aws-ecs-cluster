@@ -120,3 +120,8 @@ variable sg_tag_map {
     Environment = "Unknown"
   }
 }
+
+variable associate_public_ip_address {
+  type    = bool
+  default = false
+}
