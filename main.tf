@@ -164,7 +164,7 @@ resource "aws_launch_template" "container_instance" {
   instance_initiated_shutdown_behavior = "terminate"
   instance_type                        = var.instance_type
   key_name                             = var.key_name
-  vpc_security_group_ids               = [aws_security_group.container_instance.id]
+  #vpc_security_group_ids               = [aws_security_group.container_instance.id]
   user_data                            = base64encode(data.template_cloudinit_config.container_instance_cloud_config.rendered)
 
   monitoring {
@@ -174,6 +174,7 @@ resource "aws_launch_template" "container_instance" {
   network_interfaces {
     associate_public_ip_address = var.associate_public_ip_address
     security_groups             = [aws_security_group.container_instance.id]
+    delete_on_termination       = true
   }
 }
 
